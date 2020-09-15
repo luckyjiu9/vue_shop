@@ -1,0 +1,33 @@
+html,
+body,
+#app {
+  height: 100vh;
+  width: 100%;
+  background: rgb(1, 75, 88);
+  margin: 0;
+  padding: 0;
+}
+
+.el-breadcrumb {
+  margin-bottom: 15px;
+  font-size: 13px;
+}
+
+.el-card {
+  box-shadow: 0 0 5px 0 rgb(204, 204, 204) !important;
+}
+
+.el-table {
+  margin-top: 15px;
+  font-size: 13px;
+}
+
+.el-pagination {
+  margin-top: 15px;
+}
+
+.el-pager li.active {
+  color: #78C950;
+  cursor: default;
+}
+
