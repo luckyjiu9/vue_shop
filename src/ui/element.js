@@ -8,10 +8,26 @@ import {
   Container, Header, Aside,
   Breadcrumb, BreadcrumbItem,
   Card, Row, Col, TableColumn, Table,
-  Switch, Tooltip, Pagination, Dialog,
-  MessageBox
+  Switch, Tooltip, Pagination, Dialog, Upload,
+  MessageBox, Tag, Tree, Tabs, TabPane,
+  Option, Cascader, Alert, Loading, Step, Steps,
+  CheckboxGroup, Checkbox, Timeline, TimelineItem
 } from 'element-ui';
-
+Vue.use(Timeline)
+Vue.use(TimelineItem)
+Vue.use(CheckboxGroup)
+Vue.use(Upload)
+Vue.use(Checkbox)
+Vue.use(Cascader)
+Vue.use(Step)
+Vue.use(Steps)
+Vue.use(TabPane)
+Vue.use(Tabs)
+Vue.use(Loading)
+Vue.use(Alert)
+Vue.use(Tree)
+Vue.use(Option)
+Vue.use(Tag)
 Vue.use(Button)
 Vue.use(Dialog)
 Vue.use(Pagination)

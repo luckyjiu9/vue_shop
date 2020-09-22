@@ -5,9 +5,10 @@
     <el-header>
       <div>
         <img width="100%" src="../../assets/logoimg.jpg" alt />
+
         <span>电商后台管理系统</span>
       </div>
-      <el-button size="mini" type="danger" @click="clickback">退出</el-button>
+      <el-button size="mini"  type="danger" @click="clickback">退出</el-button>
     </el-header>
     <!-- 页面主体区域 -->
     <el-container>
@@ -121,7 +122,10 @@ export default {
 .home-container {
   height: 100vh;
 }
+
 .el-header img {
+
+  box-shadow: 0px 0px 10px rgb(0, 0, 0);
   width: 45px;
   height: 45px;
   margin-right: 15px;

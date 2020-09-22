@@ -50,7 +50,82 @@ const routes = [
               title: '用户列表',
               keepAlive: true
             },
+          },
+          {
+            path: '/roles',
+            name: 'roles',
+            component: () => import('../views/roles/roles.vue'),
+            meta: {
+              title: '角色列表',
+              keepAlive: true
+            },
+          },
+          {
+            path: '/rights',
+            name: 'rights',
+            component: () => import('../views/rights/rights.vue'),
+            meta: {
+              title: '权限列表',
+              keepAlive: true
+            },
+          },
+          {
+            path: '/categories',
+            name: 'categories',
+            component: () => import('../views/categories/categories.vue'),
+            meta: {
+              title: '商品分类',
+              keepAlive: true
+            },
+          },
+          {
+            path: '/params',
+            name: 'params',
+            component: () => import('../views/params/params.vue'),
+            meta: {
+              title: '分类参数',
+              keepAlive: true
+            },
+          },
+          {
+            path: '/goods',
+            name: 'goods',
+            component: () => import('../views/goods/goods.vue'),
+            meta: {
+              title: '商品列表',
+              keepAlive: true
+            },
+          },
+          {
+            path: '/goods/add',
+            name: 'add',
+            component: () => import('../views/goods/add.vue'),
+            meta: {
+              title: '添加商品',
+              keepAlive: true
+            },
+          },
+          {
+            path: '/orders',
+            name: 'orders',
+            component: () => import('../views/orders/orders.vue'),
+            meta: {
+              title: '添加商品',
+              keepAlive: true
+            },
+          },
+          {
+            path: '/reports',
+            name: 'reports',
+            component: () => import('../views/reports/reports.vue'),
+            meta: {
+              title: '添加商品',
+              keepAlive: true
+            },
           }
+
+
+
         ]
       },
 

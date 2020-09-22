@@ -8,7 +8,7 @@
     </el-breadcrumb>
     <!-- 卡片试图区 -->
     <el-card>
-      <div style="margin-top: 15px;">
+      <div>
         <!--搜索与添加区域 -->
         <el-row :gutter="10">
           <el-col :span="8">
@@ -63,7 +63,12 @@
               ></el-button>
               <!--分配角色按钮 -->
               <el-tooltip effect="dark" content="分配角色" placement="top">
-                <el-button type="primary" icon="el-icon-setting" circle></el-button>
+                <el-button
+                  @click="onclickallot(scope.row)"
+                  type="primary"
+                  icon="el-icon-setting"
+                  circle
+                ></el-button>
               </el-tooltip>
             </template>
           </el-table-column>
@@ -120,6 +125,28 @@
             <el-button type="primary" @click="alert_input_ok">确 定</el-button>
           </span>
         </el-dialog>
+        <!-- //分配角色的对话框 -->
+        <el-dialog @close="setclose" title="分配角色" :visible.sync="allotVisible" width="30%">
+          <div>
+            <p>当前的用户：{{userinfo.username}}</p>
+            <p>当前的角色：{{userinfo.role_name}}</p>
+            <p>
+              分配新角色：
+              <el-select size="20" v-model="valueRole" placeholder="请选择">
+                <el-option
+                  v-for="item in roleslist"
+                  :key="item.id"
+                  :label="item.roleName"
+                  :value="item.id"
+                ></el-option>
+              </el-select>
+            </p>
+          </div>
+          <span slot="footer" class="dialog-footer">
+            <el-button @click="allotVisible = false">取 消</el-button>
+            <el-button type="primary" @click="close_allotVisible">确 定</el-button>
+          </span>
+        </el-dialog>
       </div>
     </el-card>
   </div>
@@ -130,6 +157,7 @@
 import { users_item_get, users_item_post, users_state_put } from '../../api/user'
 export default {
   data () {
+
     // 验证邮箱的规则
     var checkEmail = (rule, value, cb) => {
       // 验证邮箱的正则表达式
@@ -151,6 +179,12 @@ export default {
       cb(new Error('请输入合法的手机号码'))
     }
     return {
+      // 已选中的角色id值
+      valueRole: [],
+      // 分配权限消息
+      userinfo: {
+
+      },
       // 这是添加表单的验证规则对象 
       rules: {
         username: [
@@ -190,6 +224,8 @@ export default {
         password: '',
         mobile: ''
       },
+      //所有角色的数据列表
+      roleslist: [],
       // 控制添加用户对话框的显示与隐藏
       Visible: false,
       // 控制修改用户对话框的显示与隐藏
@@ -205,13 +241,46 @@ export default {
         pagesize: 2,
       },
       users_item_data: [],
-      total: 0
+      total: 0,
+      //分配角色的显示隐藏
+      allotVisible: false,
+
     }
   },
   created () {
     this.users_item_get()
   },
   methods: {
+    //分配角色的确定修改
+    async close_allotVisible () {
+      if (!this.valueRole) return this.$message.error('请选择要分配角色')
+      const { data: res } = await this.$http.put(`users/${this.userinfo.id}/role`, {
+        rid: this.valueRole
+      })
+      if (res.meta.status !== 200) return this.$message.error(res.meta.msg)
+      this.$message.success(res.meta.msg)
+      this.users_item_get()
+      this.allotVisible = false
+    },
+    //监听分配角色对话框的关闭事件
+    setclose () {
+      this.valueRole = ''
+      this.userinfo = {}
+    },
+    //分配角色的对话框
+    async onclickallot (scope) {
+
+      //在展示对话框之前获取所有角色列表
+
+      const { data: res } = await this.$http.get('roles')
+      if (res.meta.status !== 200) return this.$message.error(res.meta.msg)
+      console.log(res)
+      // 返回值是200 的消息提示
+      this.userinfo = scope
+      this.roleslist = res.data
+      this.allotVisible = true
+
+    },
     //删除用户信息
     async onclick_close (id) {
       //弹框询问用户是否删除

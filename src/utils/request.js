@@ -1,6 +1,7 @@
 import axios from 'axios'
 import store from '@/store/index'
-
+import NProgress from 'nprogress'
+import 'nprogress/nprogress.css'
 // 根据环境不同引入不同api地址
 // import { baseApi } from '@/config'
 //配置请求根路径
@@ -18,9 +19,9 @@ service.interceptors.request.use(
     // 不传递默认开启loading
     if (!config.hideloading) {
       // loading
-      // Toast.loading({
-      //   forbidClick: true
-      // })
+
+      NProgress.start()
+
     }
     //判断如果有vue里的token是否有值,如果有的话加入到请求头里
     if (window.sessionStorage.getItem('token')) {
@@ -37,7 +38,7 @@ service.interceptors.request.use(
 // respone拦截器
 service.interceptors.response.use(
   response => {
-    // Toast.clear()
+    NProgress.done()
     const res = response.data
     if (res.status && res.status !== 200) {
       // 登录超时,重新登录
@@ -52,7 +53,7 @@ service.interceptors.response.use(
     }
   },
   error => {
-    // Toast.clear()
+    NProgress.done()
     console.log('err' + error) // for debug
     return Promise.reject(error)
   }

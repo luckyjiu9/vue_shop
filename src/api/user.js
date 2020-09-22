@@ -1,4 +1,4 @@
-import { shop_login, home_list, users_item } from './index'
+import { shop_login, home_list, goods_item, categories, roles_add, users_item } from './index'
 // axios
 import request from '@/utils/request'
 
@@ -17,7 +17,8 @@ export function home_list_shop (params = { type: "pop", page: 1 }) {
   return request({
     url: home_list,
     method: 'get',
-    params
+    params,
+    hideloading: false
   })
 }
 
@@ -27,7 +28,7 @@ export function users_item_get (params = {}) {
     url: users_item,
     method: 'get',
     params,
-    hideloading: true
+    hideloading: false
   })
 }
 // 添加用户
@@ -37,7 +38,33 @@ export function users_item_post (data = {}) {
     url: users_item,
     method: 'post',
     data,
-    hideloading: true
+    hideloading: false
+  })
+}
+//添加角色
+export function roles_add_post (data = {}) {
+  return request({
+    url: roles_add,
+    method: 'post',
+    data,
+    hideloading: false
+  })
+}
+//分类角色信息
+export function categories_get (params = {}) {
+  return request({
+    url: categories,
+    method: 'get',
+    params,
+    hideloading: false
+  })
+}
+export function goods_item_get (params = {}) {
+  return request({
+    url: goods_item,
+    method: 'get',
+    params,
+    hideloading: false
   })
 }
 
